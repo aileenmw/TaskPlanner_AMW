@@ -2,8 +2,6 @@
     ViewData["Title"] = "Home Page";
 
 
-    <p>@TaskPlanner.Helpers.SqlServer.IsServerConnected(TaskPlanner.Helpers.SqlServer.Connection)</p>
-
     if (TaskPlanner.Helpers.SqlServer.IsServerConnected(TaskPlanner.Helpers.SqlServer.Connection) != false)
     {
         <p>Forbindelsen til din lokale server er oprettet</p>
@@ -46,22 +44,9 @@
                 </tbody>
             </table>
         }
-        else
-        {
-            <ol class="align-content-center alert-primary">
-                <li>Opret en database ved navnet 'TaskPlanner'</li>
-                <li>
-                    Luk applikationen og kør derefter følgende kommandoer i Package Mangement konsollen  for at oprette tabeller i databasen:<br />
-                    'Add-migration InitialMigration -o Data\Migrations' <br />
-                    'Update-database' <br />
-                </li>
-                <li>Når applikationen kører kan du klikke på 'Generer testdata' knappen for at genere tastdata</li>
-            </ol>
-        }
     }
     else
-    {
-       
+    {      
         if (TaskPlanner.Helpers.SqlServer.IsServerConnected(TaskPlanner.Helpers.SqlServer.Connection) != false)
         {
             <h2>Forbindelsen er oprettet</h2>
@@ -70,7 +55,7 @@
         {
             <h2>Der er ingen forbindelse til din lokale server</h2>
             <br />
-            <h2>Hvis "@System.Environment.MachineName" ikke er navnet på din lokale SQL Server må den sættes manuelt i SqlServer.cs rodmappen og kør projektet på ny og genstart applikationen.</h2>
+            <h2>Hvis "@System.Environment.MachineName" ikke er navnet på din lokale SQL Server må den sættes manuelt i SqlServer.cs rodmappen og genstart applikationen.</h2>
         }
     }
 }

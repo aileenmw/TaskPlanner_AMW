@@ -135,7 +135,7 @@ namespace TaskPlanner.Data
                     {
                         shiftQuery = shiftQuery +
                             "INSERT INTO Shifts (StartTime, EndTime, Worker, ShiftTasks) " +
-                            "Values (GETDATE() + '02:00:00.000', GETDATE() + '09:00:00.000', " +
+                            "Values (GETDATE() + '8:00:00.000', GETDATE() + '16:00:00.000', " +
                              emplId() + ", '" +
                              taskIds() + "');";
                     }

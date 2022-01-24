@@ -62,7 +62,6 @@ namespace TaskPlanner.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public async Task<IActionResult> Edit(Shift shift)
         {
             if (!ModelState.IsValid)
@@ -120,7 +119,6 @@ namespace TaskPlanner.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public async Task<IActionResult> AddShiftTasks(Shift shift)
         {
             if (!ModelState.IsValid)
@@ -149,10 +147,7 @@ namespace TaskPlanner.Controllers
         [HttpPost]
         public IActionResult ShiftTaskAddition()
         {
-            
-
             int shiftId = Convert.ToInt32(HttpContext.Request.Form["shiftId"]);     
-
             string taskIds = HttpContext.Request.Form["taskIds"].ToString();
 
             TaskPlanner.Helpers.DbQueries.addTasksToShift(shiftId, taskIds);

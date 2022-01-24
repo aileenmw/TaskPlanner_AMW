@@ -80,14 +80,12 @@ namespace TaskPlanner.Helpers
         {
             List<WorkTask> taskList = new List<WorkTask>();
 
-            if (tasksIds != "") { 
-            Console.WriteLine("SELECT * FROM Tasks WHERE Id in (" + tasksIds + ")");
-
+            if (tasksIds != "") {
+                string CleanedTasksIds = tasksIds.Trim(' ', ',');
                 using (SqlConnection connection = new SqlConnection(SqlServer.Connection))
                 {
-                    string Query = "SELECT * FROM Tasks WHERE Id in (" + tasksIds + ")";
+                    string Query = "SELECT * FROM Tasks WHERE Id in (" + CleanedTasksIds + ")";
 
-                    Console.WriteLine("QUERY " + Query);
                     SqlCommand comm = new SqlCommand(Query, connection);
                     connection.Open();
 
@@ -255,8 +253,7 @@ namespace TaskPlanner.Helpers
             string queryString = "UPDATE Shifts SET ShiftTasks = '" +  tasks + "' WHERE Id = " + shiftId;
             using (SqlConnection con = new SqlConnection(SqlServer.Connection))
             {
-                SqlCommand command = new SqlCommand(
-                    queryString, con);
+                SqlCommand command = new SqlCommand(queryString, con);
                 con.Open();
                 try
                 {

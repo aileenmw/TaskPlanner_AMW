@@ -13,8 +13,10 @@ namespace TaskPlanner
     {
         public static void Main(string[] args)
         {
-            Helpers.SqlServer.createDb();
-            Helpers.SqlServer.createTables();
+            if (Helpers.SqlServer.IsServerConnected(Helpers.SqlServer.ConnectionWithouDb)) {
+                Helpers.SqlServer.createDb();
+                Helpers.SqlServer.createTables();
+            }
             CreateHostBuilder(args).Build().Run();
         }
 

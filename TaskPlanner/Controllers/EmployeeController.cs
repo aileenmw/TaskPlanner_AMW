@@ -32,7 +32,6 @@ namespace TaskPlanner.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public async Task<IActionResult> Create(Employee employee)
         {
             if (ModelState.IsValid)
@@ -66,7 +65,7 @@ namespace TaskPlanner.Controllers
             if (!ModelState.IsValid)
                 return View(employee);
 
-            //_context.Entry(employee).State = EntityState.Modified;
+            _context.Entry(employee).State = EntityState.Modified;
             _context.Employees.Update(employee);
 
             await _context.SaveChangesAsync();

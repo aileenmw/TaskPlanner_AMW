@@ -14,6 +14,7 @@ namespace TaskPlanner.Helpers
         private static string serverName = YourSqlServer != "" ? YourSqlServer : System.Environment.MachineName;
         public static string Connection = $"Server={serverName};Database=TaskPlanner;Trusted_Connection=True;MultipleActiveResultSets=True";
         public static string ConnectionWithouDb= $"Server={serverName};Database=;Trusted_Connection=True;MultipleActiveResultSets=True";
+        
         public static bool IsServerConnected(string connectionString)
         {
             bool connected = false;
@@ -84,9 +85,7 @@ namespace TaskPlanner.Helpers
                     con.Close();
                 }
             }
-
         }
-
 
 
         public static int tableExists(string tableName)
@@ -153,7 +152,6 @@ namespace TaskPlanner.Helpers
                                 "END";
 
             string query = queryEmpl + "; " + queryTasks + ";" + queryShifts;
-            Console.WriteLine(query);
 
             using (SqlConnection con = new SqlConnection(SqlServer.Connection))
             {
@@ -163,7 +161,6 @@ namespace TaskPlanner.Helpers
                 try
                 {
                     command.ExecuteNonQuery();
-                    Console.WriteLine("Tables are created");
                 }
                 catch (Exception)
                 {
