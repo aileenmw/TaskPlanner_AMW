@@ -1,0 +1,55 @@
+﻿@model IEnumerable<TaskPlanner.Models.Shift>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Vagtoversigt</h1>
+
+<p>
+    <a asp-action="Create">Opret vagt</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                Start tidspunkt
+            </th>
+            <th>
+                Slut tidspunkt
+            </th>
+            <th>
+                Medarbejder
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @TaskPlanner.Helpers.DbQueries.employeeNameById(item.Worker)  @Html.DisplayFor(modelItem => item.Worker)
+            </td>
+            <td>
+                @Html.ActionLink("Opdater", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Opdater Opgaver", "ShiftTaskAddition", new { id = item.Id }) |
+                @Html.ActionLink("Se Opgaver", "ViewShiftTask", new { id = item.Id }) |
+                @Html.ActionLink("Slet", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

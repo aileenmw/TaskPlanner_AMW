@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "ShiftTaskAddition";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string url = @Context.Request.Path;
+    int id = Convert.ToInt32(url.Split('/').Last());
+    bool checkAge = TaskPlanner.Helpers.DbQueries.isAChild(id);
+    var tasks = TaskPlanner.Helpers.DbQueries.GetTasks(checkAge);
+
+}
+<h1>Tilføj Opgaver Model</h1>
+<br />
+<br />
+<br />
+<div class="flex">
+    <div>
+        <form  asp-antiforgery="false"  action="" method="post" id="selectForm">
+            <input type="hidden" name="shiftId" value="@id" />
+            <div class="form-group">
+                <select id="taskIds" class="form-control" name="taskIds" multiple>
+                    @{
+                        foreach (WorkTask task in tasks)
+                        {
+                            <option class="opt" value="@task.Id">@task.TaskName</option>
+                        }
+                    }
+                </select>
+            </div>
+            <p style="font-size: 12px;">*Hold Ctrl (Windows) eller Kommando (Mac) nede for at vælge flere muligheder.</p>
+            <br /><br />
+            <input id="submitTasks" type="submit" value="Tilføj opgaver" class="btn btn-primary" />
+        </form>
+        <br />
+        <div>
+            <a asp-action="Index">Tilbage til oversigt</a>
+        </div>
+    </div>
+    <div style="margin-left: 50px;">
+        <h3 id="allShiftTasks">Opgaver, som er tildelt denne vagt</h3>
+        <p>Planen var:  </p>
+        <p>At opliste opgaverne knyttet til vagten</p>
+        <p>og lave en dynamisk udskiftning af tasks, således, at de enten står i ikke tilknyttet eller her</p>
+        <p></p>
+    </div>
+</div>

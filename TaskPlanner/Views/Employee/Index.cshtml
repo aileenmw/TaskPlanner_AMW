@@ -1,0 +1,55 @@
+﻿@model IEnumerable<TaskPlanner.Models.Employee>
+
+@{
+    ViewData["Title"] = "Medarbejderliste";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var translate = new TaskPlanner.Helpers.Translator();
+}
+
+<h1>Medarbejderoversigt</h1>
+
+<p>
+    <a asp-action="Create">Opret ny medarbejder</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+              Id
+            </th>
+            <th>
+                Fornavn
+            </th>
+            <th>
+               Efternavn
+            <th>
+                Alder
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id}) |
+                <!--@Html.ActionLink("Details", "Details", new { id=item.Id }) | -->
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

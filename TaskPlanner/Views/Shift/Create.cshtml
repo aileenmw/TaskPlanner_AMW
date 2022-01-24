@@ -1,0 +1,51 @@
+﻿@model TaskPlanner.Models.Shift
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<Employee> workers = TaskPlanner.Helpers.DbQueries.GetAllEmployees();
+}
+
+<h1>Opret vagt</h1>
+
+<h4>Vagt</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger">Start tidspunkt</div>
+            <div class="form-group">
+                <label asp-for="StartTime" class="control-label"></label>
+                <input asp-for="StartTime" asp-format="{0:d/M/yyyy HH:mm}" class="form-control" />
+                <span asp-validation-for="StartTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndTime" class="control-label">Slut tidspunkt</label>
+                <input asp-for="EndTime" asp-format="{0:d/M/yyyy HH:mm}" class="form-control" />
+                <span asp-validation-for="EndTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <select id="SelectWorker" asp-for="Worker">
+                    @{
+                        foreach (Employee w in workers)
+                        {
+                                        <option value="@w.Id"> @w.LastName, @w.FirstName - @w.Id</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@{ 
+   //DbQueries 
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

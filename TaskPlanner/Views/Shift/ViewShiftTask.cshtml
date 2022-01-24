@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "ViewShiftTask";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string url = @Context.Request.Path;
+    int id = Convert.ToInt32(url.Split('/').Last());
+}
+
+<h2>Opgaver for denne vagt (@id)</h2>
+
+@{
+    List<Shift> shifts = TaskPlanner.Helpers.DbQueries.ShiftData(id);
+
+    Shift taskIds = shifts.First();
+    string ids = taskIds.ShiftTasks;
+
+    List<WorkTask> tasks = TaskPlanner.Helpers.DbQueries.taskNames(ids);
+
+
+}
+<br/><br/>
+<table class="table thead-dark">
+    <tbody>
+        @foreach (WorkTask display in tasks)
+        {
+        <tr>
+            <td>@display.TaskName</td>
+
+        </tr>
+        }
+    </tbody>
+</table>
+<a asp-action="Index">Tilbage til oversigt</a>
